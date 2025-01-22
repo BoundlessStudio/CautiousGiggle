@@ -98,6 +98,7 @@
 }
 
 .logo {
+  width: 400px;
   transform: rotate(-45deg);
 }
 
