@@ -92,14 +92,37 @@
   padding: 10px;
   font-size: calc(4rem - -5vw);
   color: white;
-  background: linear-gradient(180deg, rgba(219,52,132,1) 0%, rgba(255,255,255,1) 50%, rgba(44,241,249,1) 100%);
+  /* background: linear-gradient(180deg, rgba(219,52,132,1) 0%, rgba(255,255,255,1) 50%, rgba(44,241,249,1) 100%);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
+  animation: glow 3s ease-in-out infinite alternate;
 }
 
 .logo {
   width: 400px;
   transform: rotate(-45deg);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+  /*animation: dsGlow 2s infinite alternate;*/
 }
 
+@keyframes glow {
+  from {
+    text-shadow: 0 0 1px rgba(219, 52, 132, 0.6), 
+                 0 0 4px rgba(219, 52, 132, 0.6), 
+                 0 0 7px rgba(219, 52, 132, 0.6), 
+                 0 0 10px rgba(219, 52, 132, 0.6), 
+                 0 0 13px rgba(219, 52, 132, 0.6), 
+                 0 0 16px rgba(219, 52, 132, 0.6), 
+                 0 0 20px rgba(219, 52, 132, 0.6);
+  }
+  to {
+    text-shadow: 0 0 1px rgba(44, 241, 249, 0.6), 
+                 0 0 4px rgba(44, 241, 249, 0.6), 
+                 0 0 7px rgba(44, 241, 249, 0.6), 
+                 0 0 10px rgba(44, 241, 249, 0.6), 
+                 0 0 13px rgba(44, 241, 249, 0.6), 
+                 0 0 16px rgba(44, 241, 249, 0.6), 
+                 0 0 20px rgba(44, 241, 249, 0.6);
+  }
+}
 </style>
