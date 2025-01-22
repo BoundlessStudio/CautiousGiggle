@@ -6,8 +6,8 @@
     <div class='hero'>
     </div>
     <div class='content'>
-      <img class='logo' src="/logo.png" />
       <div class='text'>Ephemerals</div>
+      <img class='logo' src="/logo.png" />
     </div>
   </section>
 </template>
