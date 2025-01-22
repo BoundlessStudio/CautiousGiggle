@@ -6,7 +6,7 @@
     <div class='hero'>
     </div>
     <div class='content'>
-      <div class='text'>Ephemerals</div>
+      <div class='title'>Ephemerals</div>
       <img class='logo' src="/logo.png" />
     </div>
   </section>
@@ -88,13 +88,19 @@
   flex-flow: column;
 }
 
-.text {
-  padding: 10px;
-  font-size: calc(4rem - -5vw);
+.title {
+  font-size: calc(10rem);
   color: white;
   /* background: linear-gradient(180deg, rgba(219,52,132,1) 0%, rgba(255,255,255,1) 50%, rgba(44,241,249,1) 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent; */
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+.subtitle {
+  font-size: calc(3rem);
+  color: white;
+  font-family: "Tilt Neon", sans-serif;
   animation: glow 3s ease-in-out infinite alternate;
 }
 
