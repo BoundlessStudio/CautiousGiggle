@@ -116,10 +116,10 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
           <h2 class="text-3xl">How Dose It Works</h2>
           <p class="py-2">
             By weaving together App, API, Proxy, and Vault, you get a robust and secure ecosystem. 
-            You deliver a flawless user experience, protect sensitive credentials, and ensure total peace of mind—both for your customers and/or for your team. 
+            Deliver a flawless user experience, protect sensitive credentials, and ensure total peace of mind—both for your customers and for your team. 
             This approach paves the way for innovation without the stress of exposing your most critical secrets.
           </p>
-          <h2 class="text-xl font-semibold text-gray-100 mb-4">Aliquam cursus vitae magna quis aliquet. </h2>
+          <h2 class="text-xl font-semibold text-gray-100 mb-4">Ecosystem</h2>
           <ul class="list-disc pl-6 space-y-2">
             <li><span class="font-semibold">App:</span> It manage ephemeral tokens, ensuring that real secrets never leave your protected environment.</li>
             <li><span class="font-semibold">API:</span> Complete end to end automation for creating and revoking ephemeral tokens. This allows you to integrate with Ai Sessions, Code Interpreter Sessions, and Web Containers </li>
