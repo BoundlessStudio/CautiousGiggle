@@ -1,4 +1,33 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue';
+
+ const alpha = ref('ff');
+ const beta = ref('ff');
+
+ const handleScroll = () => {
+  const scrollTop = window.scrollY;
+  const scrollHeight = document.documentElement.scrollHeight;
+  const clientHeight = window.innerHeight;
+  const scrollableHeight = scrollHeight - clientHeight;
+  
+  const fadeThreshold1 = scrollableHeight * 0.3;
+  const fadeThreshold2 = scrollableHeight * 0.4;
+  const ratio1 = Math.min(1, Math.max(0,  scrollTop / fadeThreshold1))
+  const ratio2 = Math.min(1, Math.max(0,  scrollTop / fadeThreshold2))
+  const alphaDecimal1 = 255 - Math.round(ratio1 * 255)
+  const alphaDecimal2 = 255 - Math.round(ratio2 * 255)
+
+  alpha.value = alphaDecimal1.toString(16).padStart(2, '0')
+  beta.value = alphaDecimal2.toString(16).padStart(2, '0')
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
@@ -11,7 +40,7 @@
           Ephemerals
         </h1>
         <p class="mb-8 pl-2 pr-2 leading-relaxed text-gray-300 text-2xl">
-          A reverse proxy designed to replace short lived, rate limited, sharable API Keys with your secret <span class="hiding-effect">tokens</span> automagically.
+          A reverse proxy designed to replace short lived, rate limited, sharable API Keys with your secret <span class="hiding-effect">tokens</span> auto-magically.
         </p>
         <div class="flex justify-center">
           <a href="#" class="inline-flex text-white bg-emerald-600 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-600 rounded text-lg">
@@ -26,9 +55,10 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="0.5" transform="rotate(-45)" class="size-96 glow-white">
           <defs>
             <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#2cf1f9ff" />
-              <stop offset="50%" stop-color="#ffffff" />
-              <stop offset="100%" stop-color="#db3484ff" />
+              <!-- <stop offset="0%" stop-color="#2cf1f9ff" /> -->
+              <stop offset="0%" :stop-color="'#2cf1f9'+alpha" />
+              <stop offset="50%" :stop-color="'#ffffff'+alpha" />
+              <stop offset="100%" :stop-color="'#db3484ff'" />
             </linearGradient>
           </defs>
           <path
@@ -43,55 +73,78 @@
     </div>
   </section>
 
-  <section class=" w-full flex flex-row p-10">
+  <section class=" w-full py-20">
     <div class="h-full container mx-auto flex flex-row items-center gap-6">
       <div class="w-2/3">
-        <div class="box ">
-          <div class="text-white p-5">
-            <img src="https://placehold.co/900x400" alt="Diagram" />
-          </div>
+        <div class="text-white p-5">
+          <h2 class="text-3xl">What To Do</h2>
+          <p class="py-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed ut urna efficitur, tempus dui sagittis, vehicula magna. 
+            Duis convallis porta odio a pellentesque. Aliquam cursus vitae magna quis aliquet. 
+            Suspendisse viverra tempus nisl, sit amet venenatis magna consequat et. 
+            Maecenas gravida eget quam et tristique. Vestibulum semper quam ac gravida porta. 
+            Aliquam tincidunt malesuada posuere. Praesent quis vehicula risus, vitae sagittis est. 
+            Maecenas sit amet dapibus velit. Vestibulum ac orci id lacus pulvinar tincidunt non tristique orci. 
+            Duis vel risus a eros sagittis cursus.
+          </p>
+          <p class="py-2">
+            Donec ipsum massa, suscipit in neque sed, commodo ornare urna. Nunc luctus urna ut dui hendrerit pharetra et eu dui. 
+            Donec at urna euismod mi laoreet ornare at id lectus. Maecenas id tincidunt velit, eu elementum nulla. 
+            Etiam vel nisi sodales, accumsan neque at, convallis nibh. Morbi vestibulum a ante eu efficitur. 
+            Mauris auctor vitae diam eu semper.
+          </p>
         </div>
       </div>
       <div class="w-1/3">
+        <div class="box ">
+          <div class="text-white p-5">
+            <div class="py-2 font-bold text-lg">Replace</div>
+<pre>
+curl <span class="bg-yellow-300 text-yellow-900">https://api.openai.com</span>/v1/models \
+  -H "Authorization: Bearer <span class="bg-yellow-300 text-yellow-900">sk-proj-*****</span>"
+</pre>
+            <div class="py-2 font-bold text-lg">With</div>
+<pre>
+curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</span>/v1/models \
+  -H "Authorization: Bearer <span class="bg-green-300 text-green-900">ephemerals-*****</span>" 
+</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full flex flex-row py-20">
+    <div class="h-full container mx-auto flex flex-row items-center gap-6">
+      <div class="w-1/2">
+        <div class="box ">
+          <div class="text-white p-5">
+            <img src="/diagram.0.png" alt="Diagram" />
+          </div>
+        </div>
+      </div>
+      <div class="w-1/2">
         <div class="text-white p-5">
-          <h2 class="text-3xl">AI</h2>
+          <h2 class="text-3xl">How It Works</h2>
           <p class="py-2">
-            AI can be incredibly helpful, but handing over your permanent API keys to an AI service is like giving someone the master key to your house— it is a huge security risk. 
+            Nunc luctus urna ut dui hendrerit pharetra et eu dui. 
+            Donec at urna euismod mi laoreet ornare at id lectus. Maecenas id tincidunt velit, eu elementum nulla. 
+            Etiam vel nisi sodales, accumsan neque at, convallis nibh. Morbi vestibulum a ante eu efficitur. 
+            Mauris auctor vitae diam eu semper.
           </p>
           <p class="py-2">
-            With Ephemeral Keys, you can have the best of both worlds: empower AI to do its magic on your data without sacrificing security or control. 
-            They grant temporary, limited-use access. Instead of giving a single, permanent key, you generate a brand-new one each time—like a short-lived guest pass for your API.
+            Aliquam cursus vitae magna quis aliquet. 
+            Suspendisse viverra tempus nisl, sit amet venenatis magna consequat et. 
+            Maecenas gravida eget quam et tristique. Vestibulum semper quam ac gravida porta. 
+            Aliquam tincidunt malesuada posuere. Praesent quis vehicula risus, vitae sagittis est. 
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class=" w-full p-10">
-    <div class="h-full container mx-auto flex flex-row items-center gap-6">
-      <div class="w-2/3">
-        <div class="text-white p-5">
-          <h2 class="text-3xl">Collaboration</h2>
-          <p class="py-2">
-            Sharing a single, permanent API key is a security risk waiting to happen. Every time you pass around your primary key, you lose control over how it’s used, and you could expose your systems to unwanted access or data breaches. Not to mention, once that key is out in the wild, it’s difficult (and sometimes impossible) to rein it back in.
-          </p>
-          <p class="py-2">
-            <b>Enter Ephemeral API Keys</b> Your modern solution for controlled and secure key sharing. Ephemeral keys empower you to share API access without surrendering the full power of your core credentials. They’re short-lived, can be easily rate-limited, and swiftly revoked—ensuring that you and your collaborators stay protected. Here’s why they matter:
-          </p>
-          <p class="py-2">
-            Stop risking permanent exposure of your most critical credentials. With Ephemeral API keys, you can collaborate freely while maintaining rock-solid security, knowing that any shared access is temporary and under strict control. Embrace the peace of mind—your data will thank you.
-          </p>
-        </div>
-      </div>
-      <div class="w-1/3">
-        <div class="box ">
-          <div class="text-white p-5">
-            <img src="https://placehold.co/600x400" alt="Diagram" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <section class="w-full flex justify-center items-center mt-20">
     <footer class="bg-zinc-900 w-full">
@@ -133,15 +186,15 @@
               <h2 class="mb-6 text-sm font-semibold uppercase text-white">Follow us</h2>
               <ul class="text-gray-400 font-medium">
                 <li class="mb-4"><a href="https://github.com/BoundlessStudio/CautiousGiggle" target="_blank" class="hover:underline">Github</a></li>
-                <li class="mb-4"><a href="#" target="_blank" class="hover:underline">Twitter</a></li>
+                <li class="mb-4"><a href="https://x.com/VenatioStudios" target="_blank" class="hover:underline">Twitter</a></li>
                 <li><a href="#" class="hover:underline">Discord</a></li>
               </ul>
             </div>
             <div>
               <h2 class="mb-6 text-sm font-semibold uppercase text-white">Legal</h2>
               <ul class="text-gray-400 font-medium">
-                <li class="mb-4"><RouterLink to="/privacy" class="hover:underline">Privacy Policy</RouterLink></li>
-                <li><RouterLink to="/terms" class="hover:underline">Terms &amp; Conditions</RouterLink></li>
+                <li class="mb-4"><a href="/privacy" class="hover:underline">Privacy Policy</a></li>
+                <li><a href="/terms" class="hover:underline">Terms &amp; Conditions</a></li>
               </ul>
             </div>
           </div>
@@ -163,7 +216,7 @@
                   <path fill-rule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clip-rule="evenodd" />
                 </svg>
               </a>
-              <a href="https://github.com/BoundlessStudio/YellowDuck" class="text-gray-500 hover:text-white ms-5">
+              <a href="https://github.com/BoundlessStudio/CautiousGiggle" class="text-gray-500 hover:text-white ms-5">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd" />
                 </svg>
