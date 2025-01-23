@@ -1,32 +1,24 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 
- const alpha = ref('ff');
- const beta = ref('ff');
-
+ const alpha = ref('ff')
+ const beta = ref('ff')
  const handleScroll = () => {
-  const scrollTop = window.scrollY;
-  const scrollHeight = document.documentElement.scrollHeight;
-  const clientHeight = window.innerHeight;
-  const scrollableHeight = scrollHeight - clientHeight;
-  
-  const fadeThreshold1 = scrollableHeight * 0.3;
-  const fadeThreshold2 = scrollableHeight * 0.4;
-  const ratio1 = Math.min(1, Math.max(0,  scrollTop / fadeThreshold1))
-  const ratio2 = Math.min(1, Math.max(0,  scrollTop / fadeThreshold2))
-  const alphaDecimal1 = 255 - Math.round(ratio1 * 255)
-  const alphaDecimal2 = 255 - Math.round(ratio2 * 255)
-
-  alpha.value = alphaDecimal1.toString(16).padStart(2, '0')
-  beta.value = alphaDecimal2.toString(16).padStart(2, '0')
+  const scrollTop = window.scrollY
+  const scrollHeight = document.documentElement.scrollHeight
+  const clientHeight = window.innerHeight
+  const scrollableHeight = scrollHeight - clientHeight
+  alpha.value = (255 - Math.round( Math.min(1, Math.max(0,  scrollTop / (scrollableHeight * 0.1))) * 255)).toString(16).padStart(2, '0')
+  beta.value = (255 - Math.round( Math.min(1, Math.max(0,  scrollTop / (scrollableHeight * 0.2))) * 255)).toString(16).padStart(2, '0')
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScroll)
+  handleScroll()
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', handleScroll)
 });
 </script>
 
@@ -54,15 +46,14 @@ onUnmounted(() => {
       <div class="w-1/2">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="0.5" transform="rotate(-45)" class="size-96 glow-white">
           <defs>
-            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <!-- <stop offset="0%" stop-color="#2cf1f9ff" /> -->
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" :stop-color="'#2cf1f9'+alpha" />
-              <stop offset="50%" :stop-color="'#ffffff'+alpha" />
+              <stop offset="50%" :stop-color="'#ffffff'+beta" />
               <stop offset="100%" :stop-color="'#db3484ff'" />
             </linearGradient>
           </defs>
           <path
-            stroke="url(#gradient3)"
+            stroke="url(#gradient1)"
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -79,20 +70,16 @@ onUnmounted(() => {
         <div class="text-white p-5">
           <h2 class="text-3xl">What To Do</h2>
           <p class="py-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Sed ut urna efficitur, tempus dui sagittis, vehicula magna. 
-            Duis convallis porta odio a pellentesque. Aliquam cursus vitae magna quis aliquet. 
-            Suspendisse viverra tempus nisl, sit amet venenatis magna consequat et. 
-            Maecenas gravida eget quam et tristique. Vestibulum semper quam ac gravida porta. 
-            Aliquam tincidunt malesuada posuere. Praesent quis vehicula risus, vitae sagittis est. 
-            Maecenas sit amet dapibus velit. Vestibulum ac orci id lacus pulvinar tincidunt non tristique orci. 
-            Duis vel risus a eros sagittis cursus.
+            To use our proxy in place of the standard OpenAI endpoint, you’ll need to make two simple changes to your existing API calls. 
           </p>
           <p class="py-2">
-            Donec ipsum massa, suscipit in neque sed, commodo ornare urna. Nunc luctus urna ut dui hendrerit pharetra et eu dui. 
-            Donec at urna euismod mi laoreet ornare at id lectus. Maecenas id tincidunt velit, eu elementum nulla. 
-            Etiam vel nisi sodales, accumsan neque at, convallis nibh. Morbi vestibulum a ante eu efficitur. 
-            Mauris auctor vitae diam eu semper.
+            First, replace the base URL Then, swap your original token for your new ephemeral token.
+          </p>
+          <p class="py-2">
+            By making these replacements, you’ll route your requests through our proxy servers, ensuring they connect properly and securely. The steps are similar for any API endpoint—just remember to update both the base URL and the authorization token wherever they appear in your code.
+          </p>
+          <p class="py-2">
+            Once the changes are in place, you can continue using original API as usual.
           </p>
         </div>
       </div>
@@ -126,16 +113,20 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
       </div>
       <div class="w-1/2">
         <div class="text-white p-5">
-          <h2 class="text-3xl">How It Works</h2>
+          <h2 class="text-3xl">How Dose It Works</h2>
           <p class="py-2">
-            Nunc luctus urna ut dui hendrerit pharetra et eu dui. 
-            Donec at urna euismod mi laoreet ornare at id lectus. Maecenas id tincidunt velit, eu elementum nulla. 
-            Etiam vel nisi sodales, accumsan neque at, convallis nibh. Morbi vestibulum a ante eu efficitur. 
-            Mauris auctor vitae diam eu semper.
+            By weaving together App, API, Proxy, and Vault, you get a robust and secure ecosystem. 
+            You deliver a flawless user experience, protect sensitive credentials, and ensure total peace of mind—both for your customers and/or for your team. 
+            This approach paves the way for innovation without the stress of exposing your most critical secrets.
           </p>
+          <h2 class="text-xl font-semibold text-gray-100 mb-4">Aliquam cursus vitae magna quis aliquet. </h2>
+          <ul class="list-disc pl-6 space-y-2">
+            <li><span class="font-semibold">App:</span> It manage ephemeral tokens, ensuring that real secrets never leave your protected environment.</li>
+            <li><span class="font-semibold">API:</span> Complete end to end automation for creating and revoking ephemeral tokens. This allows you to integrate with Ai Sessions, Code Interpreter Sessions, and Web Containers </li>
+            <li><span class="font-semibold">Proxy:</span> It takes the ephemeral token from your API, then secretly fetches the genuine API key from the Vault. By swapping in the real token at the last possible moment.</li>
+            <li><span class="font-semibold">Vault:</span> When the Proxy needs a real token, the Vault steps in, hands over the secret, and then locks down again. This ensures your tokens remain secure.</li>
+          </ul>
           <p class="py-2">
-            Aliquam cursus vitae magna quis aliquet. 
-            Suspendisse viverra tempus nisl, sit amet venenatis magna consequat et. 
             Maecenas gravida eget quam et tristique. Vestibulum semper quam ac gravida porta. 
             Aliquam tincidunt malesuada posuere. Praesent quis vehicula risus, vitae sagittis est. 
           </p>
@@ -144,6 +135,43 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
     </div>
   </section>
 
+  <section class=" w-full py-20">
+    <div class="h-full container mx-auto flex flex-row items-center gap-6">
+      <div class="">
+        <div class="text-white p-5">
+          <h2 class="text-3xl">Why Trust Us</h2>
+          <div class="mb-8">
+              <p class="text-lg mb-4">Ai, Code Interpreter Sessions, and Web Containers can be incredibly helpful, but handing over your permanent API keys to one of these services is like giving someone the master key to your house—it’s a huge security risk. With Ephemeral Keys, you can have the best of both worlds: empower these services to do their magic on your data without sacrificing security or control.</p>
+          </div>
+          <div class="mb-8">
+              <h2 class="text-2xl font-semibold text-gray-100 mb-4">Why Permanent Keys Put You at Risk</h2>
+              <ul class="list-disc pl-6 space-y-2">
+                <li><span class="font-semibold">Unrestricted Access:</span> A permanent key can be used (and abused) anytime, anywhere, without your knowledge.</li>
+                <li><span class="font-semibold">Breaches & Leaks:</span> Stolen or accidentally exposed keys can wreak havoc on your system.</li>
+                <li><span class="font-semibold">Lack of Control:</span> It’s tough to rein in usage once an AI has your permanent keys in its memory or logs.</li>
+              </ul>
+          </div>
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-100 mb-4">Enter Ephemeral Keys</h2>
+            <ul class="list-disc pl-6 space-y-4">
+              <li>
+                <p><span class="font-semibold">Enhanced Security:</span> Keys expire quickly, rendering them useless to attackers after their short lifespan.</p>
+              </li>
+              <li>
+                <p><span class="font-semibold">Built-In Rate Limiting:</span> You get fine-grained control over how many requests are made, preventing overuse and protecting resources.</p>
+              </li>
+              <li>
+                <p><span class="font-semibold">Limited Scope:</span> Restrict what an Ephemeral Key can do so you only provide the exact access needed—nothing more.</p>
+              </li>
+            </ul>
+            <p class="mt-4">When the AI finishes its task or you no longer need the enviroment, the Ephemeral Key can be revoked or automatically expire. No long-term keys left behind. Take control of leaks. Don't worry about Ai training data. It’s the perfect balance of agility, safety, and peace of mind.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
 
 
   <section class="w-full flex justify-center items-center mt-20">
