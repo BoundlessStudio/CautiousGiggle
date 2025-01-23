@@ -175,8 +175,8 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
  
 
 
-  <section class="w-full flex justify-center items-center mt-20">
-    <footer class="bg-zinc-900 w-full">
+  <section class="w-full flex justify-center items-center mt-20 ">
+    <footer class="bg-zinc-900 w-full line">
       <div class="relative container mx-auto p-4 py-6 lg:py-10">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
@@ -358,6 +358,19 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
   padding: 12px;
   border: 3px solid #0000;
   border-radius: 12px;
+  background: 
+    linear-gradient(#131219, #131219) padding-box, 
+    linear-gradient(var(--angle),#db3484, #2cf1f9) border-box;
+  animation: 8s rotate linear infinite;
+}
+
+.line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-top: 3px solid #0000;
+  /* border-radius: 12px; */
   background: 
     linear-gradient(#131219, #131219) padding-box, 
     linear-gradient(var(--angle),#db3484, #2cf1f9) border-box;
