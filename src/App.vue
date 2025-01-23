@@ -116,8 +116,7 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
           <h2 class="text-3xl">How Dose It Works</h2>
           <p class="py-2">
             By weaving together App, API, Proxy, and Vault, you get a robust and secure ecosystem. 
-            Deliver a flawless user experience, protect sensitive credentials, and ensure total peace of mind—both for your customers and for your team. 
-            This approach paves the way for innovation without the stress of exposing your most critical secrets.
+            Deliver a superior user experience, protect sensitive credentials, and ensure peace of mind—both for your customers and for your team.
           </p>
           <h2 class="text-xl font-semibold text-gray-100 mb-4">Ecosystem</h2>
           <ul class="list-disc pl-6 space-y-2">
@@ -127,8 +126,7 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
             <li><span class="font-semibold">Vault:</span> When the Proxy needs a real token, the Vault steps in, hands over the secret, and then locks down again. This ensures your tokens remain secure.</li>
           </ul>
           <p class="py-2">
-            Maecenas gravida eget quam et tristique. Vestibulum semper quam ac gravida porta. 
-            Aliquam tincidunt malesuada posuere. Praesent quis vehicula risus, vitae sagittis est. 
+            This approach paves the way for innovation without the stress of exposing your most critical secrets.
           </p>
         </div>
       </div>
@@ -141,7 +139,10 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
         <div class="text-white p-5">
           <h2 class="text-3xl">Why Trust Us</h2>
           <div class="mb-8">
-              <p class="text-lg mb-4">Ai, Code Interpreter Sessions, and Web Containers can be incredibly helpful, but handing over your permanent API keys to one of these services is like giving someone the master key to your house—it’s a huge security risk. With Ephemeral Keys, you can have the best of both worlds: empower these services to do their magic on your data without sacrificing security or control.</p>
+              <p class="text-lg mb-4">
+                <a href="https://platform.openai.com/docs/guides/safety-best-practices" class="underline">Ai</a>, 
+                <a href="https://learn.microsoft.com/en-us/azure/container-apps/sessions-code-interpreter" class="underline">Code Interpreter Sessions</a>, and 
+                <a href="https://webcontainers.io/" class="underline">Web Containers</a> can be incredibly helpful, but handing over your permanent API keys to one of these services is like giving someone the master key to your house—it’s a huge security risk. With Ephemeral Keys, you can have the best of both worlds: empower these services to do their magic on your data without sacrificing security or control.</p>
           </div>
           <div class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-100 mb-4">Why Permanent Keys Put You at Risk</h2>
@@ -161,7 +162,7 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
                 <p><span class="font-semibold">Built-In Rate Limiting:</span> You get fine-grained control over how many requests are made, preventing overuse and protecting resources.</p>
               </li>
               <li>
-                <p><span class="font-semibold">Limited Scope:</span> Restrict what an Ephemeral Key can do so you only provide the exact access needed—nothing more.</p>
+                <p><span class="font-semibold">Usage Counter:</span> Restrict how many times an Ephemeral Key can be invoked.</p>
               </li>
             </ul>
             <p class="mt-4">When the AI finishes its task or you no longer need the enviroment, the Ephemeral Key can be revoked or automatically expire. No long-term keys left behind. Take control of leaks. Don't worry about Ai training data. It’s the perfect balance of agility, safety, and peace of mind.</p>
