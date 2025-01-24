@@ -1,25 +1,44 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
- const alpha = ref('ff')
- const beta = ref('ff')
- const handleScroll = () => {
-  const scrollTop = window.scrollY
-  const scrollHeight = document.documentElement.scrollHeight
-  const clientHeight = window.innerHeight
-  const scrollableHeight = scrollHeight - clientHeight
-  alpha.value = (255 - Math.round( Math.min(1, Math.max(0,  scrollTop / (scrollableHeight * 0.1))) * 255)).toString(16).padStart(2, '0')
-  beta.value = (255 - Math.round( Math.min(1, Math.max(0,  scrollTop / (scrollableHeight * 0.2))) * 255)).toString(16).padStart(2, '0')
-};
+// Choose your start and end scroll thresholds
+// The scroll position at which fading starts
+const startFade = 50  
+// The scroll position at which the image becomes fully transparent
+const endFade   = 400  
 
+// Reactive reference for current scroll position
+const scrollY = ref(0)
+
+// Event listener to update scrollY
+function onScroll() {
+  scrollY.value = window.scrollY || window.pageYOffset
+}
+
+// Computed property for the image opacity
+const computedOpacity = computed(() => {
+  if (scrollY.value <= startFade) {
+    // Fully visible
+    return 1
+  } else if (scrollY.value >= endFade) {
+    // Fully transparent
+    return 0
+  } else {
+    // In-between: fade out proportionally
+    const fraction = (scrollY.value - startFade) / (endFade - startFade)
+    return 1 - fraction
+  }
+})
+
+// Register the scroll event when the component mounts
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  handleScroll()
-});
+  window.addEventListener('scroll', onScroll)
+})
 
+// Clean up the event listener when the component unmounts
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-});
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
 
 <template>
@@ -32,7 +51,7 @@ onUnmounted(() => {
           Ephemerals
         </h1>
         <p class="mb-8 pl-2 pr-2 leading-relaxed text-gray-300 text-2xl">
-          A reverse proxy designed to replace short lived, rate limited, sharable API Keys with your secret <span class="hiding-effect">tokens</span> auto-magically.
+          A reverse proxy designed to replace our short lived, rate limited, sharable tokens with your secret <span class="hiding-effect">API Keys</span> auto-magically.
         </p>
         <div class="flex justify-center">
           <a href="#" class="inline-flex text-white bg-emerald-600 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-600 rounded text-lg">
@@ -44,22 +63,7 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="w-1/2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="0.5" transform="rotate(-45)" class="size-96 glow-white">
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" :stop-color="'#2cf1f9'+alpha" />
-              <stop offset="50%" :stop-color="'#ffffff'+beta" />
-              <stop offset="100%" :stop-color="'#db3484ff'" />
-            </linearGradient>
-          </defs>
-          <path
-            stroke="url(#gradient1)"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"
-          />
-        </svg>
+        <img src="/logo.0.png" class="w-4/5 glow-white" :style="{ opacity: computedOpacity }" />
       </div>
     </div>
   </section>
@@ -79,7 +83,7 @@ onUnmounted(() => {
             By making these replacements, you’ll route your requests through our proxy servers, ensuring they connect properly and securely. The steps are similar for any API endpoint—just remember to update both the base URL and the authorization token wherever they appear in your code.
           </p>
           <p class="py-2">
-            Once the changes are in place, you can continue using original API as usual.
+            Once the changes are in place, you can continue using original parameters.
           </p>
         </div>
       </div>
@@ -115,7 +119,7 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
         <div class="text-white p-5">
           <h2 class="text-3xl">How Dose It Works</h2>
           <p class="py-2">
-            By weaving together App, API, Proxy, and Vault, you get a robust and secure ecosystem. 
+            By weaving together the App, API, Proxy, and the Vault, you get a robust and secure ecosystem. 
             Deliver a superior user experience, protect sensitive credentials, and ensure peace of mind—both for your customers and for your team.
           </p>
           <h2 class="text-xl font-semibold text-gray-100 mb-4">Ecosystem</h2>
@@ -123,7 +127,7 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
             <li><span class="font-semibold">App:</span> It manage ephemeral tokens, ensuring that real secrets never leave your protected environment.</li>
             <li><span class="font-semibold">API:</span> Complete end to end automation for creating and revoking ephemeral tokens. This allows you to integrate with Ai Sessions, Code Interpreter Sessions, and Web Containers </li>
             <li><span class="font-semibold">Proxy:</span> It takes the ephemeral token from your API, then secretly fetches the genuine API key from the Vault. By swapping in the real token at the last possible moment.</li>
-            <li><span class="font-semibold">Vault:</span> When the Proxy needs a real token, the Vault steps in, hands over the secret, and then locks down again. This ensures your tokens remain secure.</li>
+            <li><span class="font-semibold">Vault:</span> When the Proxy needs a real token, the Vault steps in, hands over the secret, and then locks down again. This ensures your Api Key remain secure.</li>
           </ul>
           <p class="py-2">
             This approach paves the way for innovation without the stress of exposing your most critical secrets.
@@ -314,7 +318,9 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
 }
 
 .glow-white {
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+  opacity: 1;
+  transition: opacity 0.2s linear;
 }
 
 /* Glow text animation */
