@@ -51,7 +51,7 @@ onUnmounted(() => {
           Ephemerals
         </h1>
         <p class="mb-8 pl-2 pr-2 leading-relaxed text-gray-300 text-2xl">
-          A reverse proxy designed to replace our short lived, rate limited, sharable tokens with your secret <span class="hiding-effect">API Keys</span> auto-magically.
+          A reverse proxy that automatically swaps out short-lived, rate-limited tokens with your secret API Keys—securely and effortlessly.
         </p>
         <div class="flex justify-center">
           <a href="#" class="inline-flex text-white bg-emerald-600 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-600 rounded text-lg">
@@ -74,16 +74,16 @@ onUnmounted(() => {
         <div class="text-white p-5">
           <h2 class="text-3xl">What To Do</h2>
           <p class="py-2">
-            To use our proxy in place of the standard OpenAI endpoint, you’ll need to make two simple changes to your existing API calls. 
+            Substitute Ephemerals’ proxy for the standard OpenAI endpoint by making two simple changes in your existing API calls:
           </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Replace the Base URL</li>
+            <li>Use Your New Ephemeral Token</li>
+          </ul>
           <p class="py-2">
-            First, replace the base URL Then, swap your original token for your new ephemeral token.
-          </p>
-          <p class="py-2">
-            By making these replacements, you’ll route your requests through our proxy servers, ensuring they connect properly and securely. The steps are similar for any API endpoint—just remember to update both the base URL and the authorization token wherever they appear in your code.
-          </p>
-          <p class="py-2">
-            Once the changes are in place, you can continue using original parameters.
+            By adjusting both the base URL and the authorization token, you route requests through our secure proxy. 
+            The process is the same for any API endpoint—just remember to update these fields wherever they appear in your code.
+            Once these changes are in place, keep using your original parameters as usual.
           </p>
         </div>
       </div>
@@ -91,15 +91,15 @@ onUnmounted(() => {
         <div class="box ">
           <div class="text-white p-5">
             <div class="py-2 font-bold text-lg">Replace</div>
-<pre>
-curl <span class="bg-yellow-300 text-yellow-900">https://api.openai.com</span>/v1/models \
-  -H "Authorization: Bearer <span class="bg-yellow-300 text-yellow-900">sk-proj-*****</span>"
-</pre>
-            <div class="py-2 font-bold text-lg">With</div>
-<pre>
-curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</span>/v1/models \
-  -H "Authorization: Bearer <span class="bg-green-300 text-green-900">ephemerals-*****</span>" 
-</pre>
+              <pre>
+              curl <span class="bg-yellow-300 text-yellow-900">https://api.openai.com</span>/v1/models \
+                -H "Authorization: Bearer <span class="bg-yellow-300 text-yellow-900">sk-proj-*****</span>"
+              </pre>
+              <div class="py-2 font-bold text-lg">With</div>
+              <pre>
+              curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</span>/v1/models \
+                -H "Authorization: Bearer <span class="bg-green-300 text-green-900">ephemerals-*****</span>" 
+              </pre>
           </div>
         </div>
       </div>
@@ -119,18 +119,17 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
         <div class="text-white p-5">
           <h2 class="text-3xl">How Dose It Works</h2>
           <p class="py-2">
-            By weaving together the App, API, Proxy, and the Vault, you get a robust and secure ecosystem. 
-            Deliver a superior user experience, protect sensitive credentials, and ensure peace of mind—both for your customers and for your team.
+            By integrating our App, API, Proxy, and Vault, you create a secure ecosystem that delivers a superior user experience while protecting your sensitive credentials.
           </p>
           <h2 class="text-xl font-semibold text-gray-100 mb-4">Ecosystem</h2>
           <ul class="list-disc pl-6 space-y-2">
-            <li><span class="font-semibold">App:</span> It manage ephemeral tokens, ensuring that real secrets never leave your protected environment.</li>
-            <li><span class="font-semibold">API:</span> Complete end to end automation for creating and revoking ephemeral tokens. This allows you to integrate with Ai Sessions, Code Interpreter Sessions, and Web Containers </li>
-            <li><span class="font-semibold">Proxy:</span> It takes the ephemeral token from your API, then secretly fetches the genuine API key from the Vault. By swapping in the real token at the last possible moment.</li>
-            <li><span class="font-semibold">Vault:</span> When the Proxy needs a real token, the Vault steps in, hands over the secret, and then locks down again. This ensures your Api Key remain secure.</li>
+            <li><span class="font-semibold">App:</span> Manages ephemeral tokens so that real secrets never leave your secure environment.</li>
+            <li><span class="font-semibold">API:</span> Automates the creation and revocation of ephemeral tokens, enabling integrations with AI Sessions, Code Interpreter Sessions, and Web Containers.</li>
+            <li><span class="font-semibold">Proxy:</span> Receives the ephemeral token from the API, then secretly retrieves the genuine API key from the Vault—swapping it in at the last possible moment.</li>
+            <li><span class="font-semibold">Vault:</span> Stores and protects your real API keys, only granting access to the Proxy when needed. Afterwards, it locks down again to keep your secrets safe.</li>
           </ul>
           <p class="py-2">
-            This approach paves the way for innovation without the stress of exposing your most critical secrets.
+            This approach encourages innovation without risking exposure of your critical credentials.
           </p>
         </div>
       </div>
@@ -143,33 +142,31 @@ curl <span class="bg-green-300 text-green-900">https://proxy.ephemerals.dev</spa
         <div class="text-white p-5">
           <h2 class="text-3xl">Why Trust Us</h2>
           <div class="mb-8">
-              <p class="text-lg mb-4">
-                <a href="https://platform.openai.com/docs/guides/safety-best-practices" class="underline">Ai</a>, 
-                <a href="https://learn.microsoft.com/en-us/azure/container-apps/sessions-code-interpreter" class="underline">Code Interpreter Sessions</a>, and 
-                <a href="https://webcontainers.io/" class="underline">Web Containers</a> can be incredibly helpful, but handing over your permanent API keys to one of these services is like giving someone the master key to your house—it’s a huge security risk. With Ephemeral Keys, you can have the best of both worlds: empower these services to do their magic on your data without sacrificing security or control.</p>
-          </div>
-          <div class="mb-8">
-              <h2 class="text-2xl font-semibold text-gray-100 mb-4">Why Permanent Keys Put You at Risk</h2>
-              <ul class="list-disc pl-6 space-y-2">
-                <li><span class="font-semibold">Unrestricted Access:</span> A permanent key can be used (and abused) anytime, anywhere, without your knowledge.</li>
-                <li><span class="font-semibold">Breaches & Leaks:</span> Stolen or accidentally exposed keys can wreak havoc on your system.</li>
-                <li><span class="font-semibold">Lack of Control:</span> It’s tough to rein in usage once an AI has your permanent keys in its memory or logs.</li>
-              </ul>
+            <p class="text-lg mb-4">
+              <a href="https://platform.openai.com/docs/guides/safety-best-practices" class="underline">Ai</a>, 
+              <a href="https://learn.microsoft.com/en-us/azure/container-apps/sessions-code-interpreter" class="underline">Code Interpreter Sessions</a>, and 
+              <a href="https://webcontainers.io/" class="underline">Web Containers</a> can be incredibly helpful, but handing over your permanent API keys to one of these services is like giving someone the master key to your house—it’s a huge security risk. 
+            </p>
           </div>
           <div>
             <h2 class="text-2xl font-semibold text-gray-100 mb-4">Enter Ephemeral Keys</h2>
             <ul class="list-disc pl-6 space-y-4">
               <li>
-                <p><span class="font-semibold">Enhanced Security:</span> Keys expire quickly, rendering them useless to attackers after their short lifespan.</p>
+                <p><span class="font-semibold">Enhanced Security:</span> Keys expire quickly, making them useless to attackers if they’re leaked.</p>
               </li>
               <li>
-                <p><span class="font-semibold">Built-In Rate Limiting:</span> You get fine-grained control over how many requests are made, preventing overuse and protecting resources.</p>
+                <p><span class="font-semibold">Built-In Rate Limiting:</span> Control how many requests are made, preventing abuse or overuse.</p>
               </li>
               <li>
-                <p><span class="font-semibold">Usage Counter:</span> Restrict how many times an Ephemeral Key can be invoked.</p>
+                <p><span class="font-semibold">Usage Counter:</span> Restrict the number of times a key can be invoked.</p>
+              </li>
+              <li>
+                <p><span class="font-semibold">Flexible Revocation:</span> When the AI finishes its task or you’re done with the environment, revoke the key or let it expire. No long-term keys left behind.</p>
               </li>
             </ul>
-            <p class="mt-4">When the AI finishes its task or you no longer need the enviroment, the Ephemeral Key can be revoked or automatically expire. No long-term keys left behind. Take control of leaks. Don't worry about Ai training data. It’s the perfect balance of agility, safety, and peace of mind.</p>
+            <p class="mt-4">
+              Strike the perfect balance of agility, security, and peace of mind. Keep your API keys protected while still leveraging the power of AI and other services.
+            </p>
           </div>
         </div>
       </div>
