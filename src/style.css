@@ -28,3 +28,87 @@ body {
 pre, code {
   white-space: pre-line;
 }
+
+
+.glow-white {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+/* Glow text animation */
+@keyframes neon {
+  from { text-shadow: 
+    0 0 1px #db348499,
+    0 0 4px rgba(219, 52, 132, 0.6),
+    0 0 7px rgba(219, 52, 132, 0.6),
+    0 0 10px rgba(219, 52, 132, 0.6),
+    0 0 13px rgba(219, 52, 132, 0.6),
+    0 0 16px rgba(219, 52, 132, 0.6),
+    0 0 20px rgba(219, 52, 132, 0.6);
+  }
+  to { text-shadow: 
+    0 0 1px #2cf1f999,
+    0 0 4px rgba(44, 241, 249, 0.6),
+    0 0 7px rgba(44, 241, 249, 0.6),
+    0 0 10px rgba(44, 241, 249, 0.6),
+    0 0 13px rgba(44, 241, 249, 0.6),
+    0 0 16px rgba(44, 241, 249, 0.6),
+    0 0 20px rgba(44, 241, 249, 0.6);
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.box {
+  padding: 12px;
+  border: 3px solid #0000;
+  border-radius: 12px;
+  background: 
+    linear-gradient(#131219, #131219) padding-box, 
+    linear-gradient(var(--angle),#db3484, #2cf1f9) border-box;
+  animation: 8s rotate linear infinite;
+}
+
+.line-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-top: 3px solid #0000;
+  background: 
+    linear-gradient(#131219, #131219) padding-box, 
+    linear-gradient(var(--angle),#db3484, #2cf1f9) border-box;
+  animation: 8s rotate linear infinite;
+}
+
+.line-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 3px solid #0000;
+  background: 
+    linear-gradient(#131219, #131219) padding-box, 
+    linear-gradient(var(--angle),#db3484, #2cf1f9) border-box;
+  animation: 8s rotate linear infinite;
+}
+
+.hiding-effect {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+  cursor: pointer;
+}
+.hiding-effect:hover {
+  filter: blur(0);
+}

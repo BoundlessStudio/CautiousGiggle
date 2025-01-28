@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import Header from "@/components/HeaderComponent.vue"
+import Footer from "@/components/FooterComponent.vue"
 </script>
 
 <template>
-  <div class="min-h-screen bg-black text-white p-8">
-    <div class="max-w-4xl mx-auto">
+  <Header />
+  <section class="min-h-screen bg-black text-white p-8">
+    <div class="container mx-auto">
       <h1 class="text-4xl font-bold mb-8">Frequently Asked Questions</h1>
       
       <div class="space-y-6">
@@ -46,7 +49,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <Footer />
 </template>
 
 <style scoped>

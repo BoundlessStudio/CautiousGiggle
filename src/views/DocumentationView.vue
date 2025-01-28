@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import Header from "@/components/HeaderComponent.vue"
+import Footer from "@/components/FooterComponent.vue"
 </script>
 
 <template>
-  <div class="min-h-screen bg-black text-white p-8">
+  <Header />
+  <section class="min-h-screen bg-black text-white p-8">
     <div class="container mx-auto">
       <h1 class="text-4xl font-bold mb-8">Documentation</h1>
       
@@ -51,28 +54,10 @@
         </p>
       </section>
     </div>
-  </div>
+  </section>
+  <Footer />
 </template>
 
 <style scoped>
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
 
-@keyframes rotate {
-  to {
-    --angle: 360deg;
-  }
-}
-
-.box {
-  border: 3px solid #0000;
-  border-radius: 12px;
-  background: 
-    linear-gradient(#131219, #131219) padding-box, 
-    linear-gradient(var(--angle),#db3484, #2cf1f9) border-box;
-  animation: 8s rotate linear infinite;
-}
 </style>
